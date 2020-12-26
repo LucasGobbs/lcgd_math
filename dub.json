@@ -1,0 +1,9 @@
+{
+	"authors": [
+		"Gobbs"
+	],
+	"copyright": "Copyright © 2020, Gobbs",
+	"description": "A minimal D application.",
+	"license": "MIT",
+	"name": "lcgd_math"
+}

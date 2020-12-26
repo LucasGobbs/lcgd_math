@@ -1,0 +1,15 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/lcgd_math
+lcgd_math.so
+lcgd_math.dylib
+lcgd_math.dll
+lcgd_math.a
+lcgd_math.lib
+lcgd_math-test-*
+*.exe
+*.o
+*.obj
+*.lst
