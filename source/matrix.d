@@ -8,8 +8,8 @@ class Matrix(T, alias _width, alias _height){
 	static assert(_width > 0);
 	static assert(_height > 0);
 
-	private immutable int i_size = _width;
-	private immutable int j_size = _height; 
+	immutable int i_size = _width;
+	immutable int j_size = _height; 
 	private T[_width][_height] data;
 	
 	// Basic Getters ==================================
@@ -19,7 +19,9 @@ class Matrix(T, alias _width, alias _height){
 	int height(){return this.j_size;}
 	/**/
 	ref T get(int i, int j){ 
-		assert(i >= 0 && i <_height && j >= 0 && j < _width);
+		//writeln(i, " ", j," ",_width, " ", _height);
+		assert(i >= 0 && i < this.i_size && j >= 0 && j < this.j_size);
+		//writeln(this.data, this.data[i][j]);
 		return this.data[i][j];
 	}
 
@@ -45,8 +47,9 @@ class Matrix(T, alias _width, alias _height){
 		this.data = new T[_width][_height];
 		this.copy(original);
 	}
+	
 	/// Makes this matrix a identity matrix
-	void identity(){
+	void toIdentity(){
 		this.fill((i,j,l){
 			if(i==j){
 				return 1.0;
@@ -55,22 +58,39 @@ class Matrix(T, alias _width, alias _height){
 			}
 		});
 	}
+	///
+	static Matrix identity(){
+		auto id =  new Matrix();
+		id.toIdentity();
+		return id;
+	}
+	unittest {
+		auto identity =  fMat2.identity();
 	
-	
+
+		auto identity_manual = new fMat2();
+		//identity_manual[0,0] = 1.0f;
+		//identity_manual[0,1] = 0.0f;
+		//identity_manual[1,0] = 0.0f;
+		//identity_manual[1,1] = 1.0f;
+
+		//assert(identity == identity_manual);
+		//assert(1==2);
+	}
 	/// Fill the matrix, with the value
 	void fill(T d){
-		foreach(int i, ref lines; this.data){
-			foreach(int j, ref value; lines){
-				value = d;
+		for(int i = 0; i < this.i_size; i++){
+			for(int j = 0; j < this.j_size; j++){
+				this.data[i][j] = d;
 			}
 		}
 	}
 	/// Fill the matrix, with the return of the function
 	void fill(T function(int i, int j, int l) lmb){
 		int linear = 0;
-		foreach(int i, ref lines; this.data){
-			foreach(int j, ref value; lines){
-				value = lmb(i, j, linear);
+		for(int i = 0; i < this.i_size; i++){
+			for(int j = 0; j < this.j_size; j++){
+				this.data[i][j] = lmb(i, j, linear);
 				linear++;
 			}
 		}
