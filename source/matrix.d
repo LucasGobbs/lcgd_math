@@ -7,8 +7,9 @@ import operators;
 class Matrix(T, alias _width, alias _height){
 	static assert(_width > 0);
 	static assert(_height > 0);
-
+	///
 	immutable int i_size = _width;
+	///
 	immutable int j_size = _height; 
 	private T[_width][_height] data;
 	
@@ -19,9 +20,7 @@ class Matrix(T, alias _width, alias _height){
 	int height(){return this.j_size;}
 	/**/
 	ref T get(int i, int j){ 
-		//writeln(i, " ", j," ",_width, " ", _height);
 		assert(i >= 0 && i < this.i_size && j >= 0 && j < this.j_size);
-		//writeln(this.data, this.data[i][j]);
 		return this.data[i][j];
 	}
 
@@ -65,13 +64,12 @@ class Matrix(T, alias _width, alias _height){
 	
 
 		auto identity_manual = new fMat2();
-		//identity_manual[0,0] = 1.0f;
-		//identity_manual[0,1] = 0.0f;
-		//identity_manual[1,0] = 0.0f;
-		//identity_manual[1,1] = 1.0f;
+		identity_manual[0,0] = 1.0f;
+		identity_manual[0,1] = 0.0f;
+		identity_manual[1,0] = 0.0f;
+		identity_manual[1,1] = 1.0f;
 
-		//assert(identity == identity_manual);
-		//assert(1==2);
+		assert(identity == identity_manual);
 	}
 	/// Fill the matrix, with the value
 	void fill(T d){
@@ -95,7 +93,7 @@ class Matrix(T, alias _width, alias _height){
 	void copy(Matrix original){
 		for(int i = 0; i < this.i_size; i++){
 			for(int j = 0; j < this.j_size; j++){
-				this.data[i][j] =  original[i,j];
+				this.data[i][j] = original[i,j];
 			}
 		}
 	}
