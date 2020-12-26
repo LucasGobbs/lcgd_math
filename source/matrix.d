@@ -31,11 +31,7 @@ class Matrix(T, alias _width, alias _height){
 	this(){
 		this.data = new T[_width][_height];
 	}
-	/**/
-	// TODO check column
-	this(T[_width] array){
-		this.data = array;
-	}
+
 	/// Creates and fills with value
 	this(T value){
 		this.data = new T[_width][_height];
@@ -97,9 +93,9 @@ class Matrix(T, alias _width, alias _height){
 	}
 	/// Copy the data of other matrix
 	void copy(Matrix original){
-		foreach(int i, ref lines; this.data){
-			foreach(int j, ref value; lines){
-				value = original[i,j];
+		for(int i = 0; i < this.i_size; i++){
+			for(int j = 0; j < this.j_size; j++){
+				this.data[i][j] =  original[i,j];
 			}
 		}
 	}

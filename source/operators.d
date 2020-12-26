@@ -15,20 +15,16 @@ template Operators(T, alias _width, alias _height){
 		return true;
 	}
 	unittest{
-		auto a = new Matrix(1.0f);
-		auto b = new Matrix(1.0f);
-		//assert(Matrix.equal(a,b));
+		auto a = new fMat2(1.0f);
+		auto b = new fMat2(1.0f);
+		assert(fMat2.equal(a,b) && a == b);
 	}
 	/// Adds
 	void add(Matrix b){
-		writeln("a: ",this.i_size, " ", this.j_size);
-		writeln("a: ",b.i_size, " ", b.j_size);
+
 		for(int i = 0; i < this.i_size; i++){
 			for(int j = 0; j < this.j_size; j++){
-				writeln("i: ", i, " j: ", j);
-				writeln(this.data[i][j]);
-				writeln("a");
-				writeln(b[i,j]);
+				this.data[i][j] += b[i,j];
 			}
 		}
 	}
@@ -39,13 +35,15 @@ template Operators(T, alias _width, alias _height){
 		return c;
 	}
 	unittest{
-		Matrix a = new Matrix(1.0f);
-		Matrix a2 = new Matrix(1.0f);
-		Matrix b = new Matrix(2.0f);
-		Matrix c = new Matrix(4.0f);
+		auto a = new fMat2(1.0f);
+		auto a_2 = new fMat2(1.0f);
+
+		auto b = new fMat2(2.0f);
+		auto c = new fMat2(3.0f);
+
 		a.add(b);
-		// assert( a == c && Matrix.add(a2,b) == c);
-		// assert( 1 == 2);
+		assert(a == c && fMat2.add(a_2, b) == c);
+
 	}
 	/// Adds
 	void sub(Matrix b){
